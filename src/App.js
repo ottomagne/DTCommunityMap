@@ -1,22 +1,8 @@
+import "./App.css";
 import React from 'react';
-import { Icon } from 'leaflet';
+import { BiohackerIcon, ModderIcon, PiercerIcon } from './components/Icons';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import partnerData from "./data/partners.json";
-
-const biohackerIcon = new Icon({
-  iconUrl: require("./data/dtYellowPin.png"),
-  iconSize: [20, 34]
-});
-
-const modderIcon = new Icon({
-  iconUrl: require("./data/dtRedPin.png"),
-  iconSize: [20, 34]
-});
-
-const piercerIcon = new Icon({
-  iconUrl: require("./data/dtBluePin.png"),
-  iconSize: [20, 34]
-});
 
 const App = () => {
   const [activeMarker, setActiveMarker] = React.useState(null);
@@ -25,7 +11,7 @@ const App = () => {
 
   return (
     <div>
-      <Map center={initPosition} zoom={8} style={{height: "100vh", width: "100%"}}>
+      <Map center={initPosition} zoom={8} >
         <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -37,7 +23,7 @@ const App = () => {
             key={i} 
             position={[partner.Coordinates.split(', ')[0], partner.Coordinates.split(', ')[1]]}
             onclick={() => {setActiveMarker(partner);}}
-            icon={ partner.Type === "biohacker" ? biohackerIcon : partner.Type === "modder" ? modderIcon : piercerIcon }
+            icon={ partner.Type === "biohacker" ? BiohackerIcon : partner.Type === "modder" ? ModderIcon : PiercerIcon }
           />
         ))}
 
